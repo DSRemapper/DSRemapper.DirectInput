@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	  <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+	  <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+	  <BaseOutputPath>..\Plugins\DirectInput\$(Configuration)\</BaseOutputPath>
+	  <OutputPath>..\Plugins\DirectInput\$(Configuration)\</OutputPath>
+	  <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
+	  <Title>$(AssemblyName) - DSR-Plugin</Title>
+	  <Authors>Oscar-Wohlfarhrt</Authors>
+	  <Description>Plugin of DSRemapper</Description>
+	  <Copyright>Copyright (c) 2023 Oscar Andrés Wohlfarhrt</Copyright>
+	  <RepositoryType>git</RepositoryType>
+	  <PackageProjectUrl>https://github.com/Oscar-Wohlfarhrt/DSRemapper</PackageProjectUrl>
+	  <RepositoryUrl>https://github.com/Oscar-Wohlfarhrt/DSRemapper</RepositoryUrl>
+	  <AssemblyVersion>0.1.0</AssemblyVersion>
+	  <FileVersion>$(AssemblyVersion)-pre-alpha</FileVersion>
+	  <Version>$(FileVersion)</Version>
+	  <GenerateDocumentationFile>True</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DSRemapper.Core" Version="0.2.2-beta" />
+    <PackageReference Include="SharpDX.DirectInput" Version="4.2.0" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
+    <PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
+  </ItemGroup>
+
+</Project>
