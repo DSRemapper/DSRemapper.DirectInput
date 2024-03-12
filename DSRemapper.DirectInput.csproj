@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net8.0-windows</TargetFramework>
+	  <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 	  <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
@@ -18,16 +19,27 @@
 	  <PackageProjectUrl>https://github.com/Oscar-Wohlfarhrt/DSRemapper</PackageProjectUrl>
 	  <RepositoryUrl>https://github.com/Oscar-Wohlfarhrt/DSRemapper</RepositoryUrl>
 	  <AssemblyVersion>0.1.0</AssemblyVersion>
-	  <FileVersion>$(AssemblyVersion)-pre-alpha</FileVersion>
-	  <Version>$(FileVersion)</Version>
+	  <FileVersion>$(AssemblyVersion)</FileVersion>
+	  <Version>$(FileVersion)-beta</Version>
 	  <GenerateDocumentationFile>True</GenerateDocumentationFile>
+	  <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DSRemapper.Core" Version="0.2.2-beta" />
+    <PackageReference Include="DSRemapper.Core" Version="0.2.3-beta" />
     <PackageReference Include="SharpDX.DirectInput" Version="4.2.0" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
     <PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Update="DirectInput.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="..\DSRPackager -w -p $(OutputPath) -o &quot;..\ZipPlugins\$(ProjectName) v$(Version).dsrp&quot;" />
+	</Target>
 
 </Project>
