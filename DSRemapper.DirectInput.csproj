@@ -26,7 +26,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DSRemapper.Core" Version="0.4.4-beta" />
+    <PackageReference Include="DSRemapper.Core" Version="0.5.0" ExcludeAssets="runtime" PrivateAssets="All"/>
     <PackageReference Include="SharpDX.DirectInput" Version="4.2.0" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
     <PackageReference Include="System.Private.Uri" Version="4.3.2" />
@@ -40,7 +40,7 @@
   </ItemGroup>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-		<Exec Command="..\DSRPackager -w -p $(OutputPath) -o &quot;..\ZipPlugins\$(ProjectName) v$(Version).dsrp&quot;" />
+		<Exec Command="..\DSRPackager -w -n &quot;$(ProjectName)&quot; -p $(OutputPath)\$(ProjectName).dll -o &quot;..\ZipPlugins\$(ProjectName) v$(Version).dsrp&quot;" Condition="'$(IS_CI_BUILD)' != 'true'" />
 	</Target>
 
 </Project>

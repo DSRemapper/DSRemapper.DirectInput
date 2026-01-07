@@ -4,6 +4,7 @@ using DSRemapper.DSRMath;
 using DSRemapper.Types;
 using SharpDX.DirectInput;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 
 namespace DSRemapper.DirectInput
 {
@@ -16,11 +17,14 @@ namespace DSRemapper.DirectInput
         /// DirecInput object used in the plugin
         /// </summary>
         internal static readonly SharpDX.DirectInput.DirectInput DI = new();
+        
         /// <inheritdoc/>
         public IDSRInputDeviceInfo[] ScanDevices()
         {
             return DI.GetDevices(DeviceClass.GameControl, DeviceEnumerationFlags.AttachedOnly)
-                .Select((x) => { return new DIDeviceInfo(x); }).ToArray();
+                .Select((x) => { return new DIDeviceInfo(x); })
+                .Where(i => UDManager.CheckPriority((ushort)i.VendorId, (ushort)i.ProductId, 0))
+                .ToArray();
         }
     }
     /// <summary>
